@@ -1,379 +1,72 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { PRODUCTS } from '../lib/products';
-
-const data = JSON.parse(PRODUCTS);
-const categories = data.categories;
-
-const initialJson = JSON.stringify(data);
+import '../styles/global.css';
 ---
 
-<Layout>
-  <div id="app" client:load data-initial={initialJson}>
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="產品類別 JSON API" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>" />
+    <title>產品類別 API</title>
+  </head>
+  <body>
     <div class="container">
-      <h1>📦 產品類別管理</h1>
-      <p class="page-subtitle">管理你的產品分類與產品名稱</p>
+      <h1>📦 產品類別 API</h1>
+      <p class="page-subtitle">開發時直接編輯 <code>src/content/products.json</code></p>
 
-      <div class="toolbar">
-        <div class="toolbar-title">
-          <span>共 {categories.length} 個分類</span>
-        </div>
-        <div class="toolbar-actions">
-          <button class="btn btn-primary" onclick="window.showCategoryModal()">
-            ➕ 新增分類
-          </button>
-          <button class="btn btn-ghost" onclick="window.exportData()" title="匯出 JSON">
-            📤 匯出
-          </button>
-          <button class="btn btn-ghost" onclick="document.getElementById('importFile').click()" title="匯入 JSON">
-            📥 匯入
-          </button>
-          <input
-            type="file"
-            id="importFile"
-            accept=".json"
-            style="display:none"
-            onchange="window.importData(event)"
-          />
-        </div>
-      </div>
-
-      <div id="categories-list">
-        {categories.map((category) => (
-          <div class="category-card" data-category-id={category.id}>
-            <div class="category-header">
-              <div>
-                <div class="category-title">
-                  <span class="category-icon">{category.icon}</span>
-                  <span>{category.name}</span>
-                  <span class="category-count">({category.products.length} 項產品)</span>
-                </div>
-              </div>
-              <div class="category-actions">
-                <button class="btn btn-sm btn-ghost" onclick={`window.showAddProductModal('${category.id}')`}>
-                  ➕ 新增產品
-                </button>
-                <button class="btn btn-sm btn-ghost" onclick={`window.editCategory('${category.id}')`}>
-                  ✏️
-                </button>
-                <button class="btn btn-sm btn-ghost" onclick={`window.deleteCategory('${category.id}')`} style="color: var(--danger)">
-                  🗑️
-                </button>
-              </div>
-            </div>
-
-            {category.products.length > 0 ? (
-              <div class="product-list">
-                {category.products.map((product) => (
-                  <div class="product-item" data-product-id={product.id}>
-                    <span class="product-name">{product.name}</span>
-                    <div class="category-actions">
-                      <button class="btn btn-sm btn-ghost" onclick={`window.editProduct('${category.id}', '${product.id}')`}>
-                        ✏️
-                      </button>
-                      <button class="btn btn-sm btn-ghost" onclick={`window.deleteProduct('${category.id}', '${product.id}')`} style="color: var(--danger)">
-                        🗑️
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div class="empty-state">
-                <p>尚無產品，請新增產品</p>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div class="api-section">
-        <h2>🔌 API 文件（未來調用）</h2>
-        <p style="margin-bottom: 1rem; color: var(--text-secondary);">
-          此專案可部署後提供 JSON API，方便其他系統調用：
-        </p>
-
-        <div class="api-endpoint">
+      <div class="info-card">
+        <h2>🔌 API Endpoint</h2>
+        <div class="endpoint">
           <span class="http-method method-get">GET</span>
-          <span>/api/categories - 取得所有分類與產品</span>
+          <span class="endpoint-path">/api/categories.json</span>
         </div>
-        <div class="api-endpoint">
-          <span class="http-method method-post">POST</span>
-          <span>/api/categories - 新增分類</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="http-method method-put">PUT</span>
-          <span>/api/categories/:id - 更新分類</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="http-method method-delete">DELETE</span>
-          <span>/api/categories/:id - 刪除分類</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="http-method method-post">POST</span>
-          <span>/api/categories/:id/products - 新增產品</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="http-method method-put">PUT</span>
-          <span>/api/products/:id - 更新產品</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="http-method method-delete">DELETE</span>
-          <span>/api/products/:id - 刪除產品</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</Layout>
 
-<script is:inline>
-// ===== 前端管理功能 =====
-
-function exportData() {
-  const data = JSON.parse(localStorage.getItem('productCategories') || 'null');
-  if (!data) {
-    showToast('沒有資料可匯出');
-    return;
-  }
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `product-categories-${new Date().toISOString().slice(0, 10)}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast('匯出成功！');
-}
-
-function importData(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const data = JSON.parse(e.target.result);
-      if (!data.categories || !Array.isArray(data.categories)) {
-        showToast('JSON 格式錯誤：缺少 categories 陣列');
-        return;
-      }
-      localStorage.setItem('productCategories', JSON.stringify(data));
-      location.reload();
-    } catch (err) {
-      showToast('JSON 解析失敗');
+        <h2>📄 JSON 格式</h2>
+        <pre><code>{`  "categories": [
+    {
+      "id": "category-id",
+      "name": "分類名稱",
+      "icon": "🏷️",
+      "products": [
+        { "id": "product-id", "name": "產品名稱" }
+      ]
     }
-  };
-  reader.readAsText(file);
-}
-
-function showModal(title, bodyHTML, footerHTML) {
-  const existing = document.querySelector('.modal-overlay');
-  if (existing) existing.remove();
-
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `
-    <div class="modal">
-      <div class="modal-header">
-        <h3 class="modal-title">${title}</h3>
-        <button class="btn btn-ghost" onclick="this.closest('.modal-overlay').remove()">✕</button>
+  ]
+`}</code></pre>
       </div>
-      <div class="modal-body">
-        ${bodyHTML}
+
+      <div class="info-card">
+        <h2>✅ 即時測試</h2>
+        <button class="btn btn-primary" onclick="fetchAndShow()">🔍 查詢 API</button>
+        <pre id="api-response" class="response-block"><code>點擊上方按鈕測試 API...</code></pre>
       </div>
-      <div class="modal-footer">
-        ${footerHTML}
+
+      <div class="info-card">
+        <h2>🛠️ 開發說明</h2>
+        <ul>
+          <li>編輯 <code>src/content/products.json</code> 來修改分類與產品</li>
+          <li>執行 <code>npm run build</code> 後部署</li>
+          <li>API 會讀取 JSON 檔案並輸出 <code>application/json</code></li>
+          <li>開發模式：<code>npm run dev</code> 也可測試（需 Astro 支援 .js 輸出）</li>
+        </ul>
       </div>
     </div>
-  `;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
 
-  // Focus first input
-  const input = overlay.querySelector('.form-input');
-  if (input) input.focus();
-}
-
-function getStoredData() {
-  const stored = localStorage.getItem('productCategories');
-  if (stored) return JSON.parse(stored);
-
-  // Fallback: read from DOM
-  const app = document.getElementById('app');
-  if (app) {
-    const raw = app.getAttribute('data-initial');
-    if (raw) return JSON.parse(raw);
-  }
-
-  return { categories: [] };
-}
-
-// 新增分類
-function showCategoryModal() {
-  showModal('新增產品分類',
-    `<div class="form-group">
-       <label class="form-label">分類名稱</label>
-       <input type="text" class="form-input" id="cat-name" placeholder="例如：蔬菜類" />
-     </div>
-     <div class="form-group">
-       <label class="form-label">分類 Icon（emoji）</label>
-       <input type="text" class="form-input" id="cat-icon" placeholder="例如：🥬" maxlength="2" />
-     </div>`,
-    `<button class="btn btn-ghost" onclick="this.closest('.modal-overlay').remove()">取消</button>
-     <button class="btn btn-primary" onclick="saveNewCategory()">新增</button>`
-  );
-}
-
-function saveNewCategory() {
-  const name = document.getElementById('cat-name')?.value?.trim();
-  const icon = document.getElementById('cat-icon')?.value?.trim() || '📁';
-  if (!name) { showToast('請輸入分類名稱'); return; }
-
-  const data = getStoredData();
-  const id = name.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-' + Date.now().toString(36);
-  data.categories.push({ id, name, icon, products: [] });
-
-  localStorage.setItem('productCategories', JSON.stringify(data));
-  document.querySelector('.modal-overlay')?.remove();
-  location.reload();
-}
-
-// 編輯分類
-function editCategory(catId) {
-  const data = getStoredData();
-  const cat = data.categories.find(c => c.id === catId);
-  if (!cat) return;
-
-  showModal('編輯分類',
-    `<div class="form-group">
-       <label class="form-label">分類名稱</label>
-       <input type="text" class="form-input" id="cat-name" value="${cat.name}" />
-     </div>
-     <div class="form-group">
-       <label class="form-label">分類 Icon（emoji）</label>
-       <input type="text" class="form-input" id="cat-icon" value="${cat.icon}" maxlength="2" />
-     </div>`,
-    `<button class="btn btn-ghost" onclick="this.closest('.modal-overlay').remove()">取消</button>
-     <button class="btn btn-primary" onclick="updateCategory('${catId}')">更新</button>`
-  );
-}
-
-function updateCategory(catId) {
-  const name = document.getElementById('cat-name')?.value?.trim();
-  const icon = document.getElementById('cat-icon')?.value?.trim() || '📁';
-  if (!name) { showToast('請輸入分類名稱'); return; }
-
-  const data = getStoredData();
-  const cat = data.categories.find(c => c.id === catId);
-  if (!cat) return;
-  cat.name = name;
-  cat.icon = icon;
-
-  localStorage.setItem('productCategories', JSON.stringify(data));
-  document.querySelector('.modal-overlay')?.remove();
-  location.reload();
-}
-
-function deleteCategory(catId) {
-  if (!confirm('確定要刪除此分類及其所有產品？')) return;
-  const data = getStoredData();
-  data.categories = data.categories.filter(c => c.id !== catId);
-  localStorage.setItem('productCategories', JSON.stringify(data));
-  location.reload();
-}
-
-// 新增產品
-function showAddProductModal(catId) {
-  const data = getStoredData();
-  const cat = data.categories.find(c => c.id === catId);
-  if (!cat) return;
-
-  showModal(`新增產品至「${cat.name}」`,
-    `<div class="form-group">
-       <label class="form-label">產品名稱</label>
-       <input type="text" class="form-input" id="prod-name" placeholder="例如：大白菜" />
-     </div>`,
-    `<button class="btn btn-ghost" onclick="this.closest('.modal-overlay').remove()">取消</button>
-     <button class="btn btn-primary" onclick="saveNewProduct('${catId}')">新增</button>`
-  );
-}
-
-function saveNewProduct(catId) {
-  const name = document.getElementById('prod-name')?.value?.trim();
-  if (!name) { showToast('請輸入產品名稱'); return; }
-
-  const data = getStoredData();
-  const cat = data.categories.find(c => c.id === catId);
-  if (!cat) return;
-
-  const id = name.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-' + Date.now().toString(36);
-  cat.products.push({ id, name });
-
-  localStorage.setItem('productCategories', JSON.stringify(data));
-  document.querySelector('.modal-overlay')?.remove();
-  location.reload();
-}
-
-function editProduct(catId, prodId) {
-  const data = getStoredData();
-  const cat = data.categories.find(c => c.id === catId);
-  if (!cat) return;
-  const prod = cat.products.find(p => p.id === prodId);
-  if (!prod) return;
-
-  showModal('編輯產品',
-    `<div class="form-group">
-       <label class="form-label">產品名稱</label>
-       <input type="text" class="form-input" id="prod-name" value="${prod.name}" />
-     </div>`,
-    `<button class="btn btn-ghost" onclick="this.closest('.modal-overlay').remove()">取消</button>
-     <button class="btn btn-primary" onclick="updateProduct('${catId}', '${prodId}')">更新</button>`
-  );
-}
-
-function updateProduct(catId, prodId) {
-  const name = document.getElementById('prod-name')?.value?.trim();
-  if (!name) { showToast('請輸入產品名稱'); return; }
-
-  const data = getStoredData();
-  const cat = data.categories.find(c => c.id === catId);
-  if (!cat) return;
-  const prod = cat.products.find(p => p.id === prodId);
-  if (!prod) return;
-  prod.name = name;
-
-  localStorage.setItem('productCategories', JSON.stringify(data));
-  document.querySelector('.modal-overlay')?.remove();
-  location.reload();
-}
-
-function deleteProduct(catId, prodId) {
-  if (!confirm('確定要刪除此產品？')) return;
-  const data = getStoredData();
-  const cat = data.categories.find(c => c.id === catId);
-  if (!cat) return;
-  cat.products = cat.products.filter(p => p.id !== prodId);
-  localStorage.setItem('productCategories', JSON.stringify(data));
-  location.reload();
-}
-
-function showToast(message) {
-  const existing = document.querySelector('.toast');
-  if (existing) existing.remove();
-  const toast = document.createElement('div');
-  toast.className = 'toast';
-  toast.textContent = message;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 2500);
-}
-
-// 掛載到 window 讓 inline onclick 可呼叫
-window.showCategoryModal = showCategoryModal;
-window.exportData = exportData;
-window.importData = importData;
-window.editCategory = editCategory;
-window.deleteCategory = deleteCategory;
-window.showAddProductModal = showAddProductModal;
-window.editProduct = editProduct;
-window.deleteProduct = deleteProduct;
-</script>
+    <script>
+      async function fetchAndShow() {
+        const resp = document.getElementById('api-response');
+        resp.innerHTML = '<code>載入中...</code>';
+        try {
+          const res = await fetch('/api/categories.json');
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          resp.innerHTML = '<code>' + JSON.stringify(data, null, 2) + '</code>';
+        } catch (err) {
+          resp.innerHTML = '<code style="color: var(--danger)">錯誤：' + err.message + '</code>';
+        }
+      }
+    </script>
+  </body>
+</html>
