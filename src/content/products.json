@@ -1,0 +1,53 @@
+{
+  "categories": [
+    {
+      "id": "vegetables",
+      "name": "蔬菜類",
+      "icon": "🥬",
+      "products": [
+        {
+          "id": "cabbage",
+          "name": "大白菜"
+        },
+        {
+          "id": "tomato",
+          "name": "番茄"
+        },
+        {
+          "id": "broccoli",
+          "name": "青花椰菜"
+        }
+      ]
+    },
+    {
+      "id": "meat",
+      "name": "肉類",
+      "icon": "🥩",
+      "products": [
+        {
+          "id": "pork",
+          "name": "豬五花肉"
+        },
+        {
+          "id": "chicken",
+          "name": "雞胸肉"
+        }
+      ]
+    },
+    {
+      "id": "canned",
+      "name": "罐頭類",
+      "icon": "🥫",
+      "products": [
+        {
+          "id": "corn",
+          "name": "玉米罐頭"
+        },
+        {
+          "id": "tuna",
+          "name": "鮪魚罐頭"
+        }
+      ]
+    }
+  ]
+}
