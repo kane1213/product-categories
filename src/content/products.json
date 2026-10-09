@@ -5,18 +5,36 @@
       "name": "蔬菜類",
       "icon": "🥬",
       "products": [
-        {
-          "id": "cabbage",
-          "name": "大白菜"
-        },
-        {
-          "id": "tomato",
-          "name": "番茄"
-        },
-        {
-          "id": "broccoli",
-          "name": "青花椰菜"
-        }
+        { "id": "cabbage", "name": "高山大白菜" },
+        { "id": "tomato", "name": "牛番茄" },
+        { "id": "broccoli", "name": "青花菜" },
+        { "id": "bok-choy", "name": "青江菜" },
+        { "id": "spinach", "name": "菠菜" },
+        { "id": "lettuce", "name": "萵苣" },
+        { "id": "carrot", "name": "胡蘿蔔" },
+        { "id": "potato", "name": "馬鈴薯" },
+        { "id": "sweet-potato", "name": "地瓜" },
+        { "id": "taroyam", "name": "芋頭" },
+        { "id": "lotus-root", "name": "蓮藕" },
+        { "id": "onion", "name": "洋蔥" },
+        { "id": "garlic", "name": "大蒜" },
+        { "id": "ginger", "name": "薑" },
+        { "id": "cherry-tomato", "name": "小番茄" },
+        { "id": "cucumber", "name": "大黃瓜" },
+        { "id": "pumpkin", "name": "南瓜" },
+        { "id": "eggplant", "name": "茄子" },
+        { "id": "bell-pepper", "name": "青椒" },
+        { "id": "chili", "name": "辣椒" },
+        { "id": "okra", "name": "秋葵" },
+        { "id": "corn", "name": "玉米" },
+        { "id": "snap-bean", "name": "四季豆" },
+        { "id": "edamame", "name": "毛豆" },
+        { "id": "bamboo-shoot", "name": "綠竹筍" },
+        { "id": "shiitake", "name": "香菇" },
+        { "id": "enoki", "name": "金針菇" },
+        { "id": "oyster-mushroom", "name": "鴻喜菇" },
+        { "id": "mushroom", "name": "洋菇" },
+        { "id": "wood-ear", "name": "木耳" }
       ]
     },
     {
@@ -24,14 +42,24 @@
       "name": "肉類",
       "icon": "🥩",
       "products": [
-        {
-          "id": "pork",
-          "name": "豬五花肉"
-        },
-        {
-          "id": "chicken",
-          "name": "雞胸肉"
-        }
+        { "id": "pork", "name": "豬五花肉" },
+        { "id": "chicken", "name": "雞胸肉" },
+        { "id": "chicken-thigh", "name": "雞腿肉" },
+        { "id": "chicken-wing", "name": "雞翅" },
+        { "id": "chicken-tender", "name": "雞里肌" },
+        { "id": "pork-tenderloin", "name": "豬里肌" },
+        { "id": "pork-belly-cube", "name": "梅花豬肉" },
+        { "id": "pork-mince", "name": "豬絞肉" },
+        { "id": "pork-ribs", "name": "排骨" },
+        { "id": "beef-sirloin", "name": "牛五花" },
+        { "id": "beef-shank", "name": "牛腱" },
+        { "id": "beef-mince", "name": "牛絞肉" },
+        { "id": "beef-steak", "name": "牛排" },
+        { "id": "lamb-slice", "name": "羊肉片" },
+        { "id": "salmon-slice", "name": "鮭魚切片" },
+        { "id": "mackerel", "name": "鯖魚" },
+        { "id": "shrimp", "name": "蝦仁" },
+        { "id": "squid", "name": "花枝" }
       ]
     },
     {
@@ -39,14 +67,147 @@
       "name": "罐頭類",
       "icon": "🥫",
       "products": [
-        {
-          "id": "corn",
-          "name": "玉米罐頭"
-        },
-        {
-          "id": "tuna",
-          "name": "鮪魚罐頭"
-        }
+        { "id": "corn-canned", "name": "玉米罐頭" },
+        { "id": "tuna", "name": "鮪魚罐頭" },
+        { "id": "sardine", "name": "沙丁魚罐頭" },
+        { "id": "chicken-soup", "name": "雞湯罐頭" },
+        { "id": "lychee-canned", "name": "荔枝罐頭" },
+        { "id": "peach-canned", "name": "水蜜桃罐頭" },
+        { "id": "mushroom-canned", "name": "洋菇罐頭" },
+        { "id": "pea-canned", "name": "豌豆罐頭" }
+      ]
+    },
+    {
+      "id": "fruits",
+      "name": "水果類",
+      "icon": "🍎",
+      "products": [
+        { "id": "fuji-apple", "name": "富士蘋果" },
+        { "id": "green-apple", "name": "青蘋果" },
+        { "id": "red-apple", "name": "紅蘋果" },
+        { "id": "golden-pineapple", "name": "金鑽鳳梨" },
+        { "id": "milk-pineapple", "name": "牛奶鳳梨" },
+        { "id": "ken-tai-mango", "name": "愛文芒果" },
+        { "id": "king-mango", "name": "金煌芒果" },
+        { "id": "kyoho-grape", "name": "巨峰葡萄" },
+        { "id": "seedless-red-grape", "name": "無籽紅葡萄" },
+        { "id": "muscat-grape", "name": "麝香葡萄" },
+        { "id": "tangerine", "name": "柳丁" },
+        { "id": "lemongrass", "name": "香吉士" },
+        { "id": "lemon", "name": "檸檬" },
+        { "id": "lime", "name": "萊姆" },
+        { "id": "grapefruit", "name": "葡萄柚" },
+        { "id": "pomelo", "name": "文旦柚" },
+        { "id": "bananas", "name": "香蕉" },
+        { "id": "watermelon", "name": "西瓜" },
+        { "id": "honeydew", "name": "哈密瓜" },
+        { "id": "papaya", "name": "木瓜" },
+        { "id": "guava", "name": "紅心芭樂" },
+        { "id": "passion-fruit", "name": "百香果" },
+        { "id": "dragon-fruit", "name": "紅肉火龍果" },
+        { "id": "kiwi", "name": "奇異果" },
+        { "id": "peach", "name": "水蜜桃" },
+        { "id": "plum", "name": "李子" },
+        { "id": "asian-pear", "name": "新高梨" },
+        { "id": "wax-pear", "name": "豐水梨" },
+        { "id": "cherry", "name": "櫻桃" },
+        { "id": "persimmon", "name": "柿子" },
+        { "id": "avocado", "name": "酪梨" },
+        { "id": "longan", "name": "龍眼" },
+        { "id": "lychee", "name": "荔枝" },
+        { "id": "strawberry", "name": "草莓" },
+        { "id": "blueberry", "name": "藍莓" }
+      ]
+    },
+    {
+      "id": "drinks",
+      "name": "飲品類",
+      "icon": "🧃",
+      "products": [
+        { "id": "mineral-water", "name": "礦泉水" },
+        { "id": "sparkling-water", "name": "氣泡水" },
+        { "id": "coconut-water", "name": "椰子水" },
+        { "id": "apple-juice", "name": "蘋果汁" },
+        { "id": "orange-juice", "name": "柳橙汁" },
+        { "id": "grape-juice", "name": "葡萄汁" },
+        { "id": "pineapple-juice", "name": "鳳梨汁" },
+        { "id": "mixed-juice", "name": "綜合果汁" },
+        { "id": "lemon-juice", "name": "檸檬汁" },
+        { "id": "soy-milk", "name": "豆漿" },
+        { "id": "fresh-milk", "name": "鮮乳" },
+        { "id": "long-life-milk", "name": "保久乳" },
+        { "id": "yogurt", "name": "優酪乳" },
+        { "id": "black-tea", "name": "紅茶" },
+        { "id": "green-tea", "name": "綠茶" },
+        { "id": "oolong-tea", "name": "烏龍茶" },
+        { "id": "wax-gourd-tea", "name": "冬瓜茶" },
+        { "id": "coffee", "name": "咖啡" },
+        { "id": "latte", "name": "拿鐵咖啡" },
+        { "id": "sports-drink", "name": "運動飲料" }
+      ]
+    },
+    {
+      "id": "gifts",
+      "name": "禮盒類",
+      "icon": "🎁",
+      "products": [
+        { "id": "fruit-gift", "name": "綜合水果禮盒" },
+        { "id": "apple-gift", "name": "蘋果禮盒" },
+        { "id": "pear-gift", "name": "水梨禮盒" },
+        { "id": "grape-gift", "name": "葡萄禮盒" },
+        { "id": "mango-gift", "name": "芒果禮盒" },
+        { "id": "cherry-gift", "name": "櫻桃禮盒" },
+        { "id": "strawberry-gift", "name": "草莓禮盒" },
+        { "id": "citrus-gift", "name": "柑橘禮盒" },
+        { "id": "pineapple-gift", "name": "鳳梨禮盒" },
+        { "id": "honeydew-gift", "name": "哈密瓜禮盒" },
+        { "id": "seasonal-gift", "name": "當季水果禮盒" },
+        { "id": "organic-veg-box", "name": "有機蔬菜箱" },
+        { "id": "mixed-veg-box", "name": "綜合蔬菜箱" },
+        { "id": "dried-fruit-gift", "name": "果乾禮盒" },
+        { "id": "nut-gift", "name": "堅果禮盒" },
+        { "id": "honey-gift", "name": "蜂蜜禮盒" },
+        { "id": "tea-gift", "name": "茶葉禮盒" },
+        { "id": "coffee-gift", "name": "咖啡禮盒" },
+        { "id": "festival-gift", "name": "年節禮盒" },
+        { "id": "mooncake-gift", "name": "中秋禮盒" }
+      ]
+    },
+    {
+      "id": "other",
+      "name": "其他類",
+      "icon": "📦",
+      "products": [
+        { "id": "eggs", "name": "雞蛋" },
+        { "id": "duck-eggs", "name": "鴨蛋" },
+        { "id": "tofu", "name": "豆腐" },
+        { "id": "dried-tofu", "name": "豆干" },
+        { "id": "milk", "name": "鮮奶" },
+        { "id": "butter", "name": "奶油" },
+        { "id": "cheese", "name": "起司" },
+        { "id": "rice", "name": "白米" },
+        { "id": "brown-rice", "name": "糙米" },
+        { "id": "glutinous-rice", "name": "糯米" },
+        { "id": "flour", "name": "麵粉" },
+        { "id": "sugar", "name": "砂糖" },
+        { "id": "brown-sugar", "name": "黑糖" },
+        { "id": "salt", "name": "食鹽" },
+        { "id": "soy-sauce", "name": "醬油" },
+        { "id": "rice-wine", "name": "米酒" },
+        { "id": "vinegar", "name": "白醋" },
+        { "id": "olive-oil", "name": "橄欖油" },
+        { "id": "salad-oil", "name": "沙拉油" },
+        { "id": "sesame-oil", "name": "香油" },
+        { "id": "honey", "name": "蜂蜜" },
+        { "id": "cashew", "name": "腰果" },
+        { "id": "almond", "name": "杏仁" },
+        { "id": "walnut", "name": "核桃" },
+        { "id": "peanut", "name": "花生" },
+        { "id": "raisin", "name": "葡萄乾" },
+        { "id": "dried-cranberry", "name": "蔓越莓乾" },
+        { "id": "dried-mushroom", "name": "香菇乾" },
+        { "id": "nori", "name": "海苔" },
+        { "id": "frozen-dumpling", "name": "冷凍水餃" }
       ]
     }
   ]
