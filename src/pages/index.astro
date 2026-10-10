@@ -59,7 +59,7 @@ import '../styles/global.css';
         const resp = document.getElementById('api-response');
         resp.innerHTML = '<code>載入中...</code>';
         try {
-          const res = await fetch('/api/categories.json');
+          const res = await fetch('api/categories.json');
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = await res.json();
           resp.innerHTML = '<code>' + JSON.stringify(data, null, 2) + '</code>';
