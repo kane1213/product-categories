@@ -1,0 +1,128 @@
+{
+  "id": "other",
+  "name": "其他類",
+  "icon": "📦",
+  "order": 7,
+  "products": [
+    {
+      "id": "eggs",
+      "name": "雞蛋"
+    },
+    {
+      "id": "duck-eggs",
+      "name": "鴨蛋"
+    },
+    {
+      "id": "tofu",
+      "name": "豆腐"
+    },
+    {
+      "id": "dried-tofu",
+      "name": "豆干"
+    },
+    {
+      "id": "milk",
+      "name": "鮮奶"
+    },
+    {
+      "id": "butter",
+      "name": "奶油"
+    },
+    {
+      "id": "cheese",
+      "name": "起司"
+    },
+    {
+      "id": "rice",
+      "name": "白米"
+    },
+    {
+      "id": "brown-rice",
+      "name": "糙米"
+    },
+    {
+      "id": "glutinous-rice",
+      "name": "糯米"
+    },
+    {
+      "id": "flour",
+      "name": "麵粉"
+    },
+    {
+      "id": "sugar",
+      "name": "砂糖"
+    },
+    {
+      "id": "brown-sugar",
+      "name": "黑糖"
+    },
+    {
+      "id": "salt",
+      "name": "食鹽"
+    },
+    {
+      "id": "soy-sauce",
+      "name": "醬油"
+    },
+    {
+      "id": "rice-wine",
+      "name": "米酒"
+    },
+    {
+      "id": "vinegar",
+      "name": "白醋"
+    },
+    {
+      "id": "olive-oil",
+      "name": "橄欖油"
+    },
+    {
+      "id": "salad-oil",
+      "name": "沙拉油"
+    },
+    {
+      "id": "sesame-oil",
+      "name": "香油"
+    },
+    {
+      "id": "honey",
+      "name": "蜂蜜"
+    },
+    {
+      "id": "cashew",
+      "name": "腰果"
+    },
+    {
+      "id": "almond",
+      "name": "杏仁"
+    },
+    {
+      "id": "walnut",
+      "name": "核桃"
+    },
+    {
+      "id": "peanut",
+      "name": "花生"
+    },
+    {
+      "id": "raisin",
+      "name": "葡萄乾"
+    },
+    {
+      "id": "dried-cranberry",
+      "name": "蔓越莓乾"
+    },
+    {
+      "id": "dried-mushroom",
+      "name": "香菇乾"
+    },
+    {
+      "id": "nori",
+      "name": "海苔"
+    },
+    {
+      "id": "frozen-dumpling",
+      "name": "冷凍水餃"
+    }
+  ]
+}

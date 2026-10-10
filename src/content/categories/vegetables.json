@@ -1,0 +1,128 @@
+{
+  "id": "vegetables",
+  "name": "蔬菜類",
+  "icon": "🥬",
+  "order": 1,
+  "products": [
+    {
+      "id": "cabbage",
+      "name": "高山大白菜"
+    },
+    {
+      "id": "tomato",
+      "name": "牛番茄"
+    },
+    {
+      "id": "broccoli",
+      "name": "青花菜"
+    },
+    {
+      "id": "bok-choy",
+      "name": "青江菜"
+    },
+    {
+      "id": "spinach",
+      "name": "菠菜"
+    },
+    {
+      "id": "lettuce",
+      "name": "萵苣"
+    },
+    {
+      "id": "carrot",
+      "name": "胡蘿蔔"
+    },
+    {
+      "id": "potato",
+      "name": "馬鈴薯"
+    },
+    {
+      "id": "sweet-potato",
+      "name": "地瓜"
+    },
+    {
+      "id": "taroyam",
+      "name": "芋頭"
+    },
+    {
+      "id": "lotus-root",
+      "name": "蓮藕"
+    },
+    {
+      "id": "onion",
+      "name": "洋蔥"
+    },
+    {
+      "id": "garlic",
+      "name": "大蒜"
+    },
+    {
+      "id": "ginger",
+      "name": "薑"
+    },
+    {
+      "id": "cherry-tomato",
+      "name": "小番茄"
+    },
+    {
+      "id": "cucumber",
+      "name": "大黃瓜"
+    },
+    {
+      "id": "pumpkin",
+      "name": "南瓜"
+    },
+    {
+      "id": "eggplant",
+      "name": "茄子"
+    },
+    {
+      "id": "bell-pepper",
+      "name": "青椒"
+    },
+    {
+      "id": "chili",
+      "name": "辣椒"
+    },
+    {
+      "id": "okra",
+      "name": "秋葵"
+    },
+    {
+      "id": "corn",
+      "name": "玉米"
+    },
+    {
+      "id": "snap-bean",
+      "name": "四季豆"
+    },
+    {
+      "id": "edamame",
+      "name": "毛豆"
+    },
+    {
+      "id": "bamboo-shoot",
+      "name": "綠竹筍"
+    },
+    {
+      "id": "shiitake",
+      "name": "香菇"
+    },
+    {
+      "id": "enoki",
+      "name": "金針菇"
+    },
+    {
+      "id": "oyster-mushroom",
+      "name": "鴻喜菇"
+    },
+    {
+      "id": "mushroom",
+      "name": "洋菇"
+    },
+    {
+      "id": "wood-ear",
+      "name": "木耳"
+    }
+  ]
+}

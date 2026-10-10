@@ -1,0 +1,88 @@
+{
+  "id": "drinks",
+  "name": "飲品類",
+  "icon": "🧃",
+  "order": 5,
+  "products": [
+    {
+      "id": "mineral-water",
+      "name": "礦泉水"
+    },
+    {
+      "id": "sparkling-water",
+      "name": "氣泡水"
+    },
+    {
+      "id": "coconut-water",
+      "name": "椰子水"
+    },
+    {
+      "id": "apple-juice",
+      "name": "蘋果汁"
+    },
+    {
+      "id": "orange-juice",
+      "name": "柳橙汁"
+    },
+    {
+      "id": "grape-juice",
+      "name": "葡萄汁"
+    },
+    {
+      "id": "pineapple-juice",
+      "name": "鳳梨汁"
+    },
+    {
+      "id": "mixed-juice",
+      "name": "綜合果汁"
+    },
+    {
+      "id": "lemon-juice",
+      "name": "檸檬汁"
+    },
+    {
+      "id": "soy-milk",
+      "name": "豆漿"
+    },
+    {
+      "id": "fresh-milk",
+      "name": "鮮乳"
+    },
+    {
+      "id": "long-life-milk",
+      "name": "保久乳"
+    },
+    {
+      "id": "yogurt",
+      "name": "優酪乳"
+    },
+    {
+      "id": "black-tea",
+      "name": "紅茶"
+    },
+    {
+      "id": "green-tea",
+      "name": "綠茶"
+    },
+    {
+      "id": "oolong-tea",
+      "name": "烏龍茶"
+    },
+    {
+      "id": "wax-gourd-tea",
+      "name": "冬瓜茶"
+    },
+    {
+      "id": "coffee",
+      "name": "咖啡"
+    },
+    {
+      "id": "latte",
+      "name": "拿鐵咖啡"
+    },
+    {
+      "id": "sports-drink",
+      "name": "運動飲料"
+    }
+  ]
+}

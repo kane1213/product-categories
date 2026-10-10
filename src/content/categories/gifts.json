@@ -1,0 +1,88 @@
+{
+  "id": "gifts",
+  "name": "禮盒類",
+  "icon": "🎁",
+  "order": 6,
+  "products": [
+    {
+      "id": "fruit-gift",
+      "name": "綜合水果禮盒"
+    },
+    {
+      "id": "apple-gift",
+      "name": "蘋果禮盒"
+    },
+    {
+      "id": "pear-gift",
+      "name": "水梨禮盒"
+    },
+    {
+      "id": "grape-gift",
+      "name": "葡萄禮盒"
+    },
+    {
+      "id": "mango-gift",
+      "name": "芒果禮盒"
+    },
+    {
+      "id": "cherry-gift",
+      "name": "櫻桃禮盒"
+    },
+    {
+      "id": "strawberry-gift",
+      "name": "草莓禮盒"
+    },
+    {
+      "id": "citrus-gift",
+      "name": "柑橘禮盒"
+    },
+    {
+      "id": "pineapple-gift",
+      "name": "鳳梨禮盒"
+    },
+    {
+      "id": "honeydew-gift",
+      "name": "哈密瓜禮盒"
+    },
+    {
+      "id": "seasonal-gift",
+      "name": "當季水果禮盒"
+    },
+    {
+      "id": "organic-veg-box",
+      "name": "有機蔬菜箱"
+    },
+    {
+      "id": "mixed-veg-box",
+      "name": "綜合蔬菜箱"
+    },
+    {
+      "id": "dried-fruit-gift",
+      "name": "果乾禮盒"
+    },
+    {
+      "id": "nut-gift",
+      "name": "堅果禮盒"
+    },
+    {
+      "id": "honey-gift",
+      "name": "蜂蜜禮盒"
+    },
+    {
+      "id": "tea-gift",
+      "name": "茶葉禮盒"
+    },
+    {
+      "id": "coffee-gift",
+      "name": "咖啡禮盒"
+    },
+    {
+      "id": "festival-gift",
+      "name": "年節禮盒"
+    },
+    {
+      "id": "mooncake-gift",
+      "name": "中秋禮盒"
+    }
+  ]
+}

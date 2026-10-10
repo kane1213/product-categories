@@ -1,0 +1,80 @@
+{
+  "id": "meat",
+  "name": "肉類",
+  "icon": "🥩",
+  "order": 2,
+  "products": [
+    {
+      "id": "pork",
+      "name": "豬五花肉"
+    },
+    {
+      "id": "chicken",
+      "name": "雞胸肉"
+    },
+    {
+      "id": "chicken-thigh",
+      "name": "雞腿肉"
+    },
+    {
+      "id": "chicken-wing",
+      "name": "雞翅"
+    },
+    {
+      "id": "chicken-tender",
+      "name": "雞里肌"
+    },
+    {
+      "id": "pork-tenderloin",
+      "name": "豬里肌"
+    },
+    {
+      "id": "pork-belly-cube",
+      "name": "梅花豬肉"
+    },
+    {
+      "id": "pork-mince",
+      "name": "豬絞肉"
+    },
+    {
+      "id": "pork-ribs",
+      "name": "排骨"
+    },
+    {
+      "id": "beef-sirloin",
+      "name": "牛五花"
+    },
+    {
+      "id": "beef-shank",
+      "name": "牛腱"
+    },
+    {
+      "id": "beef-mince",
+      "name": "牛絞肉"
+    },
+    {
+      "id": "beef-steak",
+      "name": "牛排"
+    },
+    {
+      "id": "lamb-slice",
+      "name": "羊肉片"
+    },
+    {
+      "id": "salmon-slice",
+      "name": "鮭魚切片"
+    },
+    {
+      "id": "mackerel",
+      "name": "鯖魚"
+    },
+    {
+      "id": "shrimp",
+      "name": "蝦仁"
+    },
+    {
+      "id": "squid",
+      "name": "花枝"
+    }
+  ]
+}

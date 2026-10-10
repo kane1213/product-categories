@@ -1,0 +1,152 @@
+{
+  "id": "fruits",
+  "name": "水果類",
+  "icon": "🍎",
+  "order": 4,
+  "products": [
+    {
+      "id": "fuji-apple",
+      "name": "富士蘋果"
+    },
+    {
+      "id": "green-apple",
+      "name": "青蘋果"
+    },
+    {
+      "id": "red-apple",
+      "name": "紅蘋果"
+    },
+    {
+      "id": "golden-pineapple",
+      "name": "金鑽鳳梨"
+    },
+    {
+      "id": "milk-pineapple",
+      "name": "牛奶鳳梨"
+    },
+    {
+      "id": "ken-tai-mango",
+      "name": "愛文芒果"
+    },
+    {
+      "id": "king-mango",
+      "name": "金煌芒果"
+    },
+    {
+      "id": "kyoho-grape",
+      "name": "巨峰葡萄"
+    },
+    {
+      "id": "seedless-red-grape",
+      "name": "無籽紅葡萄"
+    },
+    {
+      "id": "muscat-grape",
+      "name": "麝香葡萄"
+    },
+    {
+      "id": "tangerine",
+      "name": "柳丁"
+    },
+    {
+      "id": "lemongrass",
+      "name": "香吉士"
+    },
+    {
+      "id": "lemon",
+      "name": "檸檬"
+    },
+    {
+      "id": "lime",
+      "name": "萊姆"
+    },
+    {
+      "id": "grapefruit",
+      "name": "葡萄柚"
+    },
+    {
+      "id": "pomelo",
+      "name": "文旦柚"
+    },
+    {
+      "id": "bananas",
+      "name": "香蕉"
+    },
+    {
+      "id": "watermelon",
+      "name": "西瓜"
+    },
+    {
+      "id": "honeydew",
+      "name": "哈密瓜"
+    },
+    {
+      "id": "papaya",
+      "name": "木瓜"
+    },
+    {
+      "id": "guava",
+      "name": "紅心芭樂"
+    },
+    {
+      "id": "passion-fruit",
+      "name": "百香果"
+    },
+    {
+      "id": "dragon-fruit",
+      "name": "紅肉火龍果"
+    },
+    {
+      "id": "kiwi",
+      "name": "奇異果"
+    },
+    {
+      "id": "peach",
+      "name": "水蜜桃"
+    },
+    {
+      "id": "plum",
+      "name": "李子"
+    },
+    {
+      "id": "asian-pear",
+      "name": "新高梨"
+    },
+    {
+      "id": "wax-pear",
+      "name": "豐水梨"
+    },
+    {
+      "id": "cherry",
+      "name": "櫻桃"
+    },
+    {
+      "id": "persimmon",
+      "name": "柿子"
+    },
+    {
+      "id": "avocado",
+      "name": "酪梨"
+    },
+    {
+      "id": "longan",
+      "name": "龍眼"
+    },
+    {
+      "id": "lychee",
+      "name": "荔枝"
+    },
+    {
+      "id": "strawberry",
+      "name": "草莓"
+    },
+    {
+      "id": "blueberry",
+      "name": "藍莓"
+    },
+    {
+      "id": "blackberry",
+      "name": "黑莓"
+    }
+  ]
+}

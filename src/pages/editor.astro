@@ -1,0 +1,292 @@
+---
+import Layout from '../layouts/Layout.astro';
+const isDev = import.meta.env.DEV;
+---
+
+<Layout>
+  <div class="container editor-page">
+    <h1>🛠️ 類別編輯器</h1>
+    <p class="page-subtitle">
+      以表單方式編輯 <code>src/content/categories/*.json</code>，儲存時由本機 Node 直接覆寫原檔
+    </p>
+
+    {
+      !isDev && (
+        <div class="info-card editor-warning">
+          ⚠️ 編輯器與相關 API 僅在開發模式（<code>npm run dev</code>）可用，
+          此頁面在 build 後不會生效。
+        </div>
+      )
+    }
+
+    <div class="editor-card">
+      <div class="editor-toolbar">
+        <label for="category-file">
+          選擇檔案：
+          <select id="category-file" disabled>
+            <option value="">載入中…</option>
+          </select>
+        </label>
+        <span id="status" class="editor-status" role="status"></span>
+      </div>
+
+      <form id="editor-form" novalidate>
+        <fieldset class="editor-section" disabled>
+          <legend>類別資訊</legend>
+          <div class="field-grid">
+            <label>
+              <span>ID</span>
+              <input type="text" name="id" required pattern="[a-zA-Z0-9_-]+" autocomplete="off" />
+            </label>
+            <label>
+              <span>名稱</span>
+              <input type="text" name="name" required autocomplete="off" />
+            </label>
+            <label>
+              <span>Icon</span>
+              <input type="text" name="icon" autocomplete="off" />
+            </label>
+            <label>
+              <span>排序</span>
+              <input type="number" name="order" min="0" step="1" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="editor-section" disabled>
+          <legend>
+            產品清單
+            <span id="product-count" class="editor-count"></span>
+          </legend>
+          <div class="product-header product-row">
+            <span>ID</span>
+            <span>名稱</span>
+            <span class="row-actions"></span>
+          </div>
+          <div id="product-list"></div>
+          <button type="button" id="add-product-btn" class="btn btn-secondary add-product-btn">
+            ＋ 新增產品
+          </button>
+        </fieldset>
+      </form>
+
+      <div class="editor-actions">
+        <button id="save-btn" class="btn btn-primary" disabled>💾 儲存</button>
+        <button id="reload-btn" class="btn btn-secondary" disabled>↻ 重新載入</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // BASE_URL 可能帶尾隨斜線，先清掉再補一個，避免 //api/... 雙斜線
+    const base = new URL(
+      import.meta.env.BASE_URL.replace(/\/+$/, '') + '/',
+      window.location.origin,
+    );
+    const apiList = new URL('api/editor/categories', base).href;
+    const apiFile = (slug) => new URL('api/editor/categories/' + slug, base).href;
+
+    const select = document.getElementById('category-file');
+    const status = document.getElementById('status');
+    const form = document.getElementById('editor-form');
+    const fieldsets = [...form.querySelectorAll('fieldset')];
+    const productCount = document.getElementById('product-count');
+    const productList = document.getElementById('product-list');
+    const addProductBtn = document.getElementById('add-product-btn');
+    const saveBtn = document.getElementById('save-btn');
+    const reloadBtn = document.getElementById('reload-btn');
+
+    function setStatus(msg, kind) {
+      status.textContent = msg;
+      status.className = 'editor-status' + (kind ? ' ' + kind : '');
+    }
+
+    function setEnabled(on) {
+      fieldsets.forEach((f) => (f.disabled = !on));
+      saveBtn.disabled = !on;
+      reloadBtn.disabled = !on;
+    }
+
+    function updateProductCount() {
+      const n = productList.querySelectorAll('.product-row:not(.product-header)').length;
+      productCount.textContent = n ? `（${n} 項）` : '';
+    }
+
+    function slugFromId(id) {
+      return (id || '').trim().toLowerCase().replace(/\s+/g, '-');
+    }
+
+    function addProductRow(id, name, focus) {
+      const row = document.createElement('div');
+      row.className = 'product-row';
+
+      const idInput = document.createElement('input');
+      idInput.type = 'text';
+      idInput.value = id;
+      idInput.required = true;
+      idInput.autocomplete = 'off';
+      idInput.placeholder = '例如 pork-belly';
+
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.value = name;
+      nameInput.required = true;
+      nameInput.autocomplete = 'off';
+      nameInput.placeholder = '例如 梅花豬肉';
+
+      const actions = document.createElement('span');
+      actions.className = 'row-actions';
+      const makeBtn = (label, title, fn) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'row-btn';
+        b.textContent = label;
+        b.title = title;
+        b.addEventListener('click', fn);
+        return b;
+      };
+      actions.append(
+        makeBtn('↑', '上移', () => {
+          if (row.previousElementSibling) productList.insertBefore(row, row.previousElementSibling);
+          updateProductCount();
+        }),
+        makeBtn('↓', '下移', () => {
+          if (row.nextElementSibling) productList.insertBefore(row.nextElementSibling, row);
+          updateProductCount();
+        }),
+        makeBtn('✕', '刪除', () => {
+          row.remove();
+          updateProductCount();
+        }),
+      );
+
+      row.append(idInput, nameInput, actions);
+      productList.appendChild(row);
+      updateProductCount();
+      if (focus) idInput.focus();
+    }
+
+    function collectData() {
+      const products = [...productList.querySelectorAll('.product-row:not(.product-header)')].map((row) => {
+        const [id, name] = [...row.querySelectorAll('input')].map((i) => i.value.trim());
+        return { id, name };
+      });
+      const el = form.elements;
+      return {
+        id: el.id.value.trim(),
+        name: el.name.value.trim(),
+        icon: el.icon.value.trim(),
+        order: Number(el.order.value) || 0,
+        products,
+      };
+    }
+
+    function render(data) {
+      const el = form.elements;
+      el.id.value = data.id || '';
+      el.name.value = data.name || '';
+      el.icon.value = data.icon || '';
+      el.order.value = data.order ?? 0;
+      productList.innerHTML = '';
+      (data.products || []).forEach((p) => addProductRow(p.id || '', p.name || ''));
+    }
+
+    function validate(data) {
+      if (!data.id) return '類別 ID 不可為空';
+      if (!/^[a-zA-Z0-9_-]+$/.test(data.id)) return '類別 ID 只能使用英文、數字、- 或 _';
+      if (!data.name) return '類別名稱不可為空';
+      const seen = new Set();
+      for (const p of data.products) {
+        if (!p.id || !p.name) return '每個產品都需填寫 ID 與名稱';
+        if (!/^[a-zA-Z0-9_-]+$/.test(p.id)) return `產品 ID「${p.id}」只能使用英文、數字、- 或 _`;
+        if (seen.has(p.id)) return `產品 ID「${p.id}」重複`;
+        seen.add(p.id);
+      }
+      return null;
+    }
+
+    async function loadFile() {
+      const slug = select.value;
+      if (!slug) return;
+      setStatus('載入中…', 'loading');
+      setEnabled(false);
+      try {
+        const res = await fetch(apiFile(slug));
+        if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || `HTTP ${res.status}`);
+        render(JSON.parse(await res.text()));
+        setStatus('已載入 ' + slug, 'ok');
+      } catch (err) {
+        setStatus('載入失敗：' + err.message, 'error');
+      } finally {
+        setEnabled(true);
+      }
+    }
+
+    async function loadList() {
+      try {
+        const res = await fetch(apiList);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        const files = data.files || [];
+        select.innerHTML = '';
+        if (!files.length) {
+          select.innerHTML = '<option value="">（沒有類別檔案）</option>';
+          select.disabled = false;
+          setStatus('未找到類別檔案', 'error');
+          return;
+        }
+        files.forEach((f) => {
+          const opt = document.createElement('option');
+          opt.value = f;
+          opt.textContent = f;
+          select.appendChild(opt);
+        });
+        select.disabled = false;
+        setStatus('請選擇要編輯的檔案');
+      } catch (err) {
+        select.innerHTML = '<option value="">載入失敗</option>';
+        setStatus('載入清單失敗：' + err.message, 'error');
+      }
+    }
+
+    saveBtn.addEventListener('click', async () => {
+      const data = collectData();
+      const err = validate(data);
+      if (err) {
+        setStatus('無法儲存：' + err, 'error');
+        return;
+      }
+      const slug = select.value;
+      if (!slug) return;
+      saveBtn.disabled = true;
+      setStatus('儲存中…', 'loading');
+      try {
+        const res = await fetch(apiFile(slug), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: JSON.stringify(data, null, 2) + '\n' }),
+        });
+        const result = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(result.error || `HTTP ${res.status}`);
+        // 檔名可能因 ID 更動而不同
+        const newSlug = slugFromId(data.id) + '.json';
+        setStatus('✅ 已覆寫 ' + slug + '，dev server 會自動重新整理', 'ok');
+        if (newSlug !== slug) {
+          setStatus('⚠️ 類別 ID 已變更，建議手動重新命名檔案為 ' + newSlug, 'warning');
+        }
+        render(data);
+      } catch (e) {
+        setStatus('儲存失敗：' + e.message, 'error');
+      } finally {
+        saveBtn.disabled = false;
+      }
+    });
+
+    reloadBtn.addEventListener('click', loadFile);
+
+    addProductBtn.addEventListener('click', () => addProductRow('', '', true));
+
+    select.addEventListener('change', loadFile);
+    loadList();
+  </script>
+</Layout>

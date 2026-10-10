@@ -1,0 +1,40 @@
+{
+  "id": "canned",
+  "name": "罐頭類",
+  "icon": "🥫",
+  "order": 3,
+  "products": [
+    {
+      "id": "corn-canned",
+      "name": "玉米罐頭"
+    },
+    {
+      "id": "tuna",
+      "name": "鮪魚罐頭"
+    },
+    {
+      "id": "sardine",
+      "name": "沙丁魚罐頭"
+    },
+    {
+      "id": "chicken-soup",
+      "name": "雞湯罐頭"
+    },
+    {
+      "id": "lychee-canned",
+      "name": "荔枝罐頭"
+    },
+    {
+      "id": "peach-canned",
+      "name": "水蜜桃罐頭"
+    },
+    {
+      "id": "mushroom-canned",
+      "name": "洋菇罐頭"
+    },
+    {
+      "id": "pea-canned",
+      "name": "豌豆罐頭"
+    }
+  ]
+}
