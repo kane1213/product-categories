@@ -1,5 +1,7 @@
 node_modules/
 dist/
+# Astro 跑 dev / build 時自動產生，不進版控
+.astro/
 .env
 *.log
 .DS_Store
