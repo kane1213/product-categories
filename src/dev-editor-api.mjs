@@ -206,13 +206,15 @@ async function handleImageRequest(request, response, url) {
 
 async function handleRequest(request, response, next, base) {
   let url;
+  let pathname;
   try {
-    url = new URL(decodeURIComponent(request.url ?? '/'), 'http://localhost');
+    // 只 decode pathname：先 decode 整組 url 會讓 %2F / %3F 破壞路徑與 query 的邊界
+    url = new URL(request.url ?? '/', 'http://localhost');
+    pathname = decodeURIComponent(url.pathname);
   } catch {
     sendJson(response, 400, { error: '無效的網址' });
     return;
   }
-  const pathname = url.pathname;
   const normalizedBase = base.replace(/\/+$/, '');
 
   const categoriesMatch = matchPrefix(pathname, API_PATH, normalizedBase);
