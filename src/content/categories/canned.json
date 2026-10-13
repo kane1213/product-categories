@@ -6,35 +6,43 @@
   "products": [
     {
       "id": "corn-canned",
-      "name": "玉米罐頭"
+      "name": "玉米罐頭",
+      "img_url": "/product-categories/images/canned/corn-canned.png"
     },
     {
       "id": "tuna",
-      "name": "鮪魚罐頭"
+      "name": "鮪魚罐頭",
+      "img_url": "/product-categories/images/canned/tuna.png"
     },
     {
       "id": "sardine",
-      "name": "沙丁魚罐頭"
+      "name": "沙丁魚罐頭",
+      "img_url": ""
     },
     {
       "id": "chicken-soup",
-      "name": "雞湯罐頭"
+      "name": "雞湯罐頭",
+      "img_url": ""
     },
     {
       "id": "lychee-canned",
-      "name": "荔枝罐頭"
+      "name": "荔枝罐頭",
+      "img_url": ""
     },
     {
       "id": "peach-canned",
-      "name": "水蜜桃罐頭"
+      "name": "水蜜桃罐頭",
+      "img_url": ""
     },
     {
       "id": "mushroom-canned",
-      "name": "洋菇罐頭"
+      "name": "洋菇罐頭",
+      "img_url": ""
     },
     {
       "id": "pea-canned",
-      "name": "豌豆罐頭"
+      "name": "豌豆罐頭",
+      "img_url": ""
     }
   ]
 }

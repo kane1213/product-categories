@@ -6,75 +6,93 @@
   "products": [
     {
       "id": "pork",
-      "name": "豬五花肉"
+      "name": "豬五花肉",
+      "img_url": "/product-categories/images/meat/pork.png"
     },
     {
       "id": "chicken",
-      "name": "雞胸肉"
+      "name": "雞胸肉",
+      "img_url": "/product-categories/images/meat/chicken.png"
     },
     {
       "id": "chicken-thigh",
-      "name": "雞腿肉"
+      "name": "雞腿肉",
+      "img_url": "/product-categories/images/meat/chicken-thigh.png"
     },
     {
       "id": "chicken-wing",
-      "name": "雞翅"
+      "name": "雞翅",
+      "img_url": ""
     },
     {
       "id": "chicken-tender",
-      "name": "雞里肌"
+      "name": "雞里肌",
+      "img_url": ""
     },
     {
       "id": "pork-tenderloin",
-      "name": "豬里肌"
+      "name": "豬里肌",
+      "img_url": ""
     },
     {
       "id": "pork-belly-cube",
-      "name": "梅花豬肉"
+      "name": "梅花豬肉",
+      "img_url": ""
     },
     {
       "id": "pork-mince",
-      "name": "豬絞肉"
+      "name": "豬絞肉",
+      "img_url": ""
     },
     {
       "id": "pork-ribs",
-      "name": "排骨"
+      "name": "排骨",
+      "img_url": ""
     },
     {
       "id": "beef-sirloin",
-      "name": "牛五花"
+      "name": "牛五花",
+      "img_url": "/product-categories/images/meat/beef-sirloin.png"
     },
     {
       "id": "beef-shank",
-      "name": "牛腱"
+      "name": "牛腱",
+      "img_url": "/product-categories/images/meat/beef-shank.png"
     },
     {
       "id": "beef-mince",
-      "name": "牛絞肉"
+      "name": "牛絞肉",
+      "img_url": "/product-categories/images/meat/beef-mince.png"
     },
     {
       "id": "beef-steak",
-      "name": "牛排"
+      "name": "牛排",
+      "img_url": ""
     },
     {
       "id": "lamb-slice",
-      "name": "羊肉片"
+      "name": "羊肉片",
+      "img_url": ""
     },
     {
       "id": "salmon-slice",
-      "name": "鮭魚切片"
+      "name": "鮭魚切片",
+      "img_url": "/product-categories/images/meat/salmon-slice.png"
     },
     {
       "id": "mackerel",
-      "name": "鯖魚"
+      "name": "鯖魚",
+      "img_url": ""
     },
     {
       "id": "shrimp",
-      "name": "蝦仁"
+      "name": "蝦仁",
+      "img_url": ""
     },
     {
       "id": "squid",
-      "name": "花枝"
+      "name": "花枝",
+      "img_url": ""
     }
   ]
 }

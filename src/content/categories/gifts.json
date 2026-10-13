@@ -6,83 +6,103 @@
   "products": [
     {
       "id": "fruit-gift",
-      "name": "綜合水果禮盒"
+      "name": "綜合水果禮盒",
+      "img_url": ""
     },
     {
       "id": "apple-gift",
-      "name": "蘋果禮盒"
+      "name": "蘋果禮盒",
+      "img_url": ""
     },
     {
       "id": "pear-gift",
-      "name": "水梨禮盒"
+      "name": "水梨禮盒",
+      "img_url": ""
     },
     {
       "id": "grape-gift",
-      "name": "葡萄禮盒"
+      "name": "葡萄禮盒",
+      "img_url": ""
     },
     {
       "id": "mango-gift",
-      "name": "芒果禮盒"
+      "name": "芒果禮盒",
+      "img_url": ""
     },
     {
       "id": "cherry-gift",
-      "name": "櫻桃禮盒"
+      "name": "櫻桃禮盒",
+      "img_url": ""
     },
     {
       "id": "strawberry-gift",
-      "name": "草莓禮盒"
+      "name": "草莓禮盒",
+      "img_url": ""
     },
     {
       "id": "citrus-gift",
-      "name": "柑橘禮盒"
+      "name": "柑橘禮盒",
+      "img_url": ""
     },
     {
       "id": "pineapple-gift",
-      "name": "鳳梨禮盒"
+      "name": "鳳梨禮盒",
+      "img_url": ""
     },
     {
       "id": "honeydew-gift",
-      "name": "哈密瓜禮盒"
+      "name": "哈密瓜禮盒",
+      "img_url": ""
     },
     {
       "id": "seasonal-gift",
-      "name": "當季水果禮盒"
+      "name": "當季水果禮盒",
+      "img_url": ""
     },
     {
       "id": "organic-veg-box",
-      "name": "有機蔬菜箱"
+      "name": "有機蔬菜箱",
+      "img_url": ""
     },
     {
       "id": "mixed-veg-box",
-      "name": "綜合蔬菜箱"
+      "name": "綜合蔬菜箱",
+      "img_url": ""
     },
     {
       "id": "dried-fruit-gift",
-      "name": "果乾禮盒"
+      "name": "果乾禮盒",
+      "img_url": ""
     },
     {
       "id": "nut-gift",
-      "name": "堅果禮盒"
+      "name": "堅果禮盒",
+      "img_url": ""
     },
     {
       "id": "honey-gift",
-      "name": "蜂蜜禮盒"
+      "name": "蜂蜜禮盒",
+      "img_url": ""
     },
     {
       "id": "tea-gift",
-      "name": "茶葉禮盒"
+      "name": "茶葉禮盒",
+      "img_url": ""
     },
     {
       "id": "coffee-gift",
-      "name": "咖啡禮盒"
+      "name": "咖啡禮盒",
+      "img_url": ""
     },
     {
       "id": "festival-gift",
-      "name": "年節禮盒"
+      "name": "年節禮盒",
+      "img_url": ""
     },
     {
       "id": "mooncake-gift",
-      "name": "中秋禮盒"
+      "name": "中秋禮盒",
+      "img_url": ""
     }
   ]
 }

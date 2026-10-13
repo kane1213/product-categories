@@ -6,147 +6,183 @@
   "products": [
     {
       "id": "fuji-apple",
-      "name": "富士蘋果"
+      "name": "富士蘋果",
+      "img_url": "/product-categories/images/fruits/fuji-apple.png"
     },
     {
       "id": "green-apple",
-      "name": "青蘋果"
+      "name": "青蘋果",
+      "img_url": "/product-categories/images/fruits/green-apple.png"
     },
     {
       "id": "red-apple",
-      "name": "紅蘋果"
+      "name": "紅蘋果",
+      "img_url": "/product-categories/images/fruits/red-apple.png"
     },
     {
       "id": "golden-pineapple",
-      "name": "金鑽鳳梨"
+      "name": "金鑽鳳梨",
+      "img_url": ""
     },
     {
       "id": "milk-pineapple",
-      "name": "牛奶鳳梨"
+      "name": "牛奶鳳梨",
+      "img_url": ""
     },
     {
       "id": "ken-tai-mango",
-      "name": "愛文芒果"
+      "name": "愛文芒果",
+      "img_url": ""
     },
     {
       "id": "king-mango",
-      "name": "金煌芒果"
+      "name": "金煌芒果",
+      "img_url": ""
     },
     {
       "id": "kyoho-grape",
-      "name": "巨峰葡萄"
+      "name": "巨峰葡萄",
+      "img_url": ""
     },
     {
       "id": "seedless-red-grape",
-      "name": "無籽紅葡萄"
+      "name": "無籽紅葡萄",
+      "img_url": ""
     },
     {
       "id": "muscat-grape",
-      "name": "麝香葡萄"
+      "name": "麝香葡萄",
+      "img_url": ""
     },
     {
       "id": "tangerine",
-      "name": "柳丁"
+      "name": "柳丁",
+      "img_url": ""
     },
     {
       "id": "lemongrass",
-      "name": "香吉士"
+      "name": "香吉士",
+      "img_url": ""
     },
     {
       "id": "lemon",
-      "name": "檸檬"
+      "name": "檸檬",
+      "img_url": ""
     },
     {
       "id": "lime",
-      "name": "萊姆"
+      "name": "萊姆",
+      "img_url": ""
     },
     {
       "id": "grapefruit",
-      "name": "葡萄柚"
+      "name": "葡萄柚",
+      "img_url": ""
     },
     {
       "id": "pomelo",
-      "name": "文旦柚"
+      "name": "文旦柚",
+      "img_url": ""
     },
     {
       "id": "bananas",
-      "name": "香蕉"
+      "name": "香蕉",
+      "img_url": ""
     },
     {
       "id": "watermelon",
-      "name": "西瓜"
+      "name": "西瓜",
+      "img_url": ""
     },
     {
       "id": "honeydew",
-      "name": "哈密瓜"
+      "name": "哈密瓜",
+      "img_url": ""
     },
     {
       "id": "papaya",
-      "name": "木瓜"
+      "name": "木瓜",
+      "img_url": ""
     },
     {
       "id": "guava",
-      "name": "紅心芭樂"
+      "name": "紅心芭樂",
+      "img_url": ""
     },
     {
       "id": "passion-fruit",
-      "name": "百香果"
+      "name": "百香果",
+      "img_url": ""
     },
     {
       "id": "dragon-fruit",
-      "name": "紅肉火龍果"
+      "name": "紅肉火龍果",
+      "img_url": ""
     },
     {
       "id": "kiwi",
-      "name": "奇異果"
+      "name": "奇異果",
+      "img_url": ""
     },
     {
       "id": "peach",
-      "name": "水蜜桃"
+      "name": "水蜜桃",
+      "img_url": ""
     },
     {
       "id": "plum",
-      "name": "李子"
+      "name": "李子",
+      "img_url": ""
     },
     {
       "id": "asian-pear",
-      "name": "新高梨"
+      "name": "新高梨",
+      "img_url": ""
     },
     {
       "id": "wax-pear",
-      "name": "豐水梨"
+      "name": "豐水梨",
+      "img_url": ""
     },
     {
       "id": "cherry",
-      "name": "櫻桃"
+      "name": "櫻桃",
+      "img_url": ""
     },
     {
       "id": "persimmon",
-      "name": "柿子"
+      "name": "柿子",
+      "img_url": ""
     },
     {
       "id": "avocado",
-      "name": "酪梨"
+      "name": "酪梨",
+      "img_url": ""
     },
     {
       "id": "longan",
-      "name": "龍眼"
+      "name": "龍眼",
+      "img_url": ""
     },
     {
       "id": "lychee",
-      "name": "荔枝"
+      "name": "荔枝",
+      "img_url": ""
     },
     {
       "id": "strawberry",
-      "name": "草莓"
+      "name": "草莓",
+      "img_url": ""
     },
     {
       "id": "blueberry",
-      "name": "藍莓"
+      "name": "藍莓",
+      "img_url": ""
     },
     {
       "id": "blackberry",
-      "name": "黑莓"
+      "name": "黑莓",
+      "img_url": ""
     }
   ]
 }

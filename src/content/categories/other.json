@@ -6,123 +6,153 @@
   "products": [
     {
       "id": "eggs",
-      "name": "雞蛋"
+      "name": "雞蛋",
+      "img_url": ""
     },
     {
       "id": "duck-eggs",
-      "name": "鴨蛋"
+      "name": "鴨蛋",
+      "img_url": ""
     },
     {
       "id": "tofu",
-      "name": "豆腐"
+      "name": "豆腐",
+      "img_url": ""
     },
     {
       "id": "dried-tofu",
-      "name": "豆干"
+      "name": "豆干",
+      "img_url": ""
     },
     {
       "id": "milk",
-      "name": "鮮奶"
+      "name": "鮮奶",
+      "img_url": ""
     },
     {
       "id": "butter",
-      "name": "奶油"
+      "name": "奶油",
+      "img_url": ""
     },
     {
       "id": "cheese",
-      "name": "起司"
+      "name": "起司",
+      "img_url": ""
     },
     {
       "id": "rice",
-      "name": "白米"
+      "name": "白米",
+      "img_url": ""
     },
     {
       "id": "brown-rice",
-      "name": "糙米"
+      "name": "糙米",
+      "img_url": ""
     },
     {
       "id": "glutinous-rice",
-      "name": "糯米"
+      "name": "糯米",
+      "img_url": ""
     },
     {
       "id": "flour",
-      "name": "麵粉"
+      "name": "麵粉",
+      "img_url": ""
     },
     {
       "id": "sugar",
-      "name": "砂糖"
+      "name": "砂糖",
+      "img_url": ""
     },
     {
       "id": "brown-sugar",
-      "name": "黑糖"
+      "name": "黑糖",
+      "img_url": ""
     },
     {
       "id": "salt",
-      "name": "食鹽"
+      "name": "食鹽",
+      "img_url": ""
     },
     {
       "id": "soy-sauce",
-      "name": "醬油"
+      "name": "醬油",
+      "img_url": ""
     },
     {
       "id": "rice-wine",
-      "name": "米酒"
+      "name": "米酒",
+      "img_url": ""
     },
     {
       "id": "vinegar",
-      "name": "白醋"
+      "name": "白醋",
+      "img_url": ""
     },
     {
       "id": "olive-oil",
-      "name": "橄欖油"
+      "name": "橄欖油",
+      "img_url": ""
     },
     {
       "id": "salad-oil",
-      "name": "沙拉油"
+      "name": "沙拉油",
+      "img_url": ""
     },
     {
       "id": "sesame-oil",
-      "name": "香油"
+      "name": "香油",
+      "img_url": ""
     },
     {
       "id": "honey",
-      "name": "蜂蜜"
+      "name": "蜂蜜",
+      "img_url": ""
     },
     {
       "id": "cashew",
-      "name": "腰果"
+      "name": "腰果",
+      "img_url": ""
     },
     {
       "id": "almond",
-      "name": "杏仁"
+      "name": "杏仁",
+      "img_url": ""
     },
     {
       "id": "walnut",
-      "name": "核桃"
+      "name": "核桃",
+      "img_url": ""
     },
     {
       "id": "peanut",
-      "name": "花生"
+      "name": "花生",
+      "img_url": ""
     },
     {
       "id": "raisin",
-      "name": "葡萄乾"
+      "name": "葡萄乾",
+      "img_url": ""
     },
     {
       "id": "dried-cranberry",
-      "name": "蔓越莓乾"
+      "name": "蔓越莓乾",
+      "img_url": ""
     },
     {
       "id": "dried-mushroom",
-      "name": "香菇乾"
+      "name": "香菇乾",
+      "img_url": ""
     },
     {
       "id": "nori",
-      "name": "海苔"
+      "name": "海苔",
+      "img_url": ""
     },
     {
       "id": "frozen-dumpling",
-      "name": "冷凍水餃"
+      "name": "冷凍水餃",
+      "img_url": ""
     }
   ]
 }

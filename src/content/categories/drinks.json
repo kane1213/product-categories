@@ -6,83 +6,103 @@
   "products": [
     {
       "id": "mineral-water",
-      "name": "礦泉水"
+      "name": "礦泉水",
+      "img_url": "/product-categories/images/drinks/mineral-water.png"
     },
     {
       "id": "sparkling-water",
-      "name": "氣泡水"
+      "name": "氣泡水",
+      "img_url": "/product-categories/images/drinks/sparkling-water.png"
     },
     {
       "id": "coconut-water",
-      "name": "椰子水"
+      "name": "椰子水",
+      "img_url": "/product-categories/images/drinks/coconut-water.png"
     },
     {
       "id": "apple-juice",
-      "name": "蘋果汁"
+      "name": "蘋果汁",
+      "img_url": ""
     },
     {
       "id": "orange-juice",
-      "name": "柳橙汁"
+      "name": "柳橙汁",
+      "img_url": ""
     },
     {
       "id": "grape-juice",
-      "name": "葡萄汁"
+      "name": "葡萄汁",
+      "img_url": ""
     },
     {
       "id": "pineapple-juice",
-      "name": "鳳梨汁"
+      "name": "鳳梨汁",
+      "img_url": ""
     },
     {
       "id": "mixed-juice",
-      "name": "綜合果汁"
+      "name": "綜合果汁",
+      "img_url": ""
     },
     {
       "id": "lemon-juice",
-      "name": "檸檬汁"
+      "name": "檸檬汁",
+      "img_url": ""
     },
     {
       "id": "soy-milk",
-      "name": "豆漿"
+      "name": "豆漿",
+      "img_url": ""
     },
     {
       "id": "fresh-milk",
-      "name": "鮮乳"
+      "name": "鮮乳",
+      "img_url": ""
     },
     {
       "id": "long-life-milk",
-      "name": "保久乳"
+      "name": "保久乳",
+      "img_url": ""
     },
     {
       "id": "yogurt",
-      "name": "優酪乳"
+      "name": "優酪乳",
+      "img_url": ""
     },
     {
       "id": "black-tea",
-      "name": "紅茶"
+      "name": "紅茶",
+      "img_url": ""
     },
     {
       "id": "green-tea",
-      "name": "綠茶"
+      "name": "綠茶",
+      "img_url": ""
     },
     {
       "id": "oolong-tea",
-      "name": "烏龍茶"
+      "name": "烏龍茶",
+      "img_url": ""
     },
     {
       "id": "wax-gourd-tea",
-      "name": "冬瓜茶"
+      "name": "冬瓜茶",
+      "img_url": ""
     },
     {
       "id": "coffee",
-      "name": "咖啡"
+      "name": "咖啡",
+      "img_url": ""
     },
     {
       "id": "latte",
-      "name": "拿鐵咖啡"
+      "name": "拿鐵咖啡",
+      "img_url": ""
     },
     {
       "id": "sports-drink",
-      "name": "運動飲料"
+      "name": "運動飲料",
+      "img_url": ""
     }
   ]
 }

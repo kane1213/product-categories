@@ -58,7 +58,15 @@ const isDev = import.meta.env.DEV;
             產品清單
             <span id="product-count" class="editor-count"></span>
           </legend>
+          <p class="editor-hint">
+            💡 點一下某列的圖片格位（虛線變藍框）選定後，按
+            <kbd>Ctrl</kbd>+<kbd>V</kbd> 可直接貼上剪貼簿裡的圖片；也可按
+            <span aria-hidden="true">📷</span> 選檔。圖片存進
+            <code>public/images/&lt;類別ID&gt;/&lt;產品ID&gt;.&lt;副檔名&gt;</code>，
+            上傳成功會自動寫回該產品的 <code>img_url</code>。
+          </p>
           <div class="product-header product-row">
+            <span>圖片</span>
             <span>ID</span>
             <span>名稱</span>
             <span class="row-actions"></span>
@@ -85,6 +93,9 @@ const isDev = import.meta.env.DEV;
     );
     const apiList = new URL('api/editor/categories', base).href;
     const apiFile = (slug) => new URL('api/editor/categories/' + slug, base).href;
+    const apiImages = new URL('api/editor/images', base).href;
+    const ID_RE = /^[a-zA-Z0-9_-]+$/;
+    const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 
     const select = document.getElementById('category-file');
     const status = document.getElementById('status');
@@ -96,36 +107,218 @@ const isDev = import.meta.env.DEV;
     const saveBtn = document.getElementById('save-btn');
     const reloadBtn = document.getElementById('reload-btn');
 
+    let pasteTarget = null; // 目前選定的產品列（Ctrl+V 的目標）
+    let busy = false;
+
     function setStatus(msg, kind) {
       status.textContent = msg;
       status.className = 'editor-status' + (kind ? ' ' + kind : '');
     }
 
     function setEnabled(on) {
+      busy = !on;
       fieldsets.forEach((f) => (f.disabled = !on));
       saveBtn.disabled = !on;
       reloadBtn.disabled = !on;
     }
 
     function updateProductCount() {
-      const n = productList.querySelectorAll('.product-row:not(.product-header)').length;
-      productCount.textContent = n ? `（${n} 項）` : '';
+      const rows = productList.querySelectorAll('.product-row[data-product-row]');
+      const withImage = [...rows].filter((r) => r.querySelector('.img-slot').dataset.imgUrl);
+      const n = rows.length;
+      productCount.textContent = n
+        ? `（${n} 項，${withImage.length} 張圖）`
+        : '';
     }
 
     function slugFromId(id) {
       return (id || '').trim().toLowerCase().replace(/\s+/g, '-');
     }
 
-    function addProductRow(id, name, focus) {
+    // 圖片檔存於 public/，img_url 存「含 base 的 site-root 路徑」，部署後可直接用
+    function urlFromPath(relativePath) {
+      return new URL(relativePath, base).pathname;
+    }
+
+    function setSlotImage(row, imgUrl) {
+      const slot = row.querySelector('.img-slot');
+      slot.dataset.imgUrl = imgUrl || '';
+      const preview = slot.querySelector('.img-preview');
+      preview.innerHTML = '';
+      preview.title = '';
+      const productName = row.querySelector('[data-field="name"]')?.value || '產品圖';
+      if (imgUrl) {
+        const img = document.createElement('img');
+        img.src = /^https?:/i.test(imgUrl) ? imgUrl : new URL(imgUrl, window.location.origin).href;
+        img.alt = productName;
+        img.addEventListener('error', () => {
+          preview.innerHTML = '';
+          preview.appendChild(document.createTextNode('⚠️'));
+          preview.title = '讀不到圖片檔，可能已被移動或改名';
+        });
+        preview.appendChild(img);
+      } else {
+        preview.textContent = '＋';
+        preview.title = '尚未設定圖片';
+      }
+      updateProductCount();
+    }
+
+    function setPasteTarget(row) {
+      if (pasteTarget === row) return;
+      productList.querySelectorAll('.img-slot.is-paste-target').forEach((el) => {
+        el.classList.remove('is-paste-target');
+      });
+      pasteTarget = row;
+      if (row) row.querySelector('.img-slot').classList.add('is-paste-target');
+    }
+
+    function readAsDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(new Error('讀取圖片失敗'));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function persist() {
+      const slug = select.value;
+      if (!slug) return false;
+      const res = await fetch(apiFile(slug), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: JSON.stringify(collectData(), null, 2) + '\n' }),
+      });
+      const result = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(result.error || `HTTP ${res.status}`);
+      return true;
+    }
+
+    async function uploadImage(row, file) {
+      if (busy || !file) return;
+      if (!file.type.startsWith('image/')) {
+        setStatus('請選擇圖片檔案（PNG / JPEG / WEBP…）', 'error');
+        return;
+      }
+      if (file.size > MAX_IMAGE_BYTES) {
+        setStatus(`圖片需小於 ${MAX_IMAGE_BYTES / 1024 / 1024} MB`, 'error');
+        return;
+      }
+      const product = row.querySelector('[data-field="id"]').value.trim();
+      const category = form.elements.id.value.trim();
+      if (!ID_RE.test(category)) {
+        setStatus('請先填好「類別 ID」再上傳圖片', 'error');
+        return;
+      }
+      if (!ID_RE.test(product)) {
+        setStatus('請先填好該產品的「ID」（英文、數字、- 或 _）再上傳圖片', 'error');
+        return;
+      }
+
+      setEnabled(false);
+      setStatus(`上傳中… ${file.name || '剪貼簿圖片'}`, 'loading');
+      try {
+        const dataUrl = await readAsDataUrl(file);
+        const res = await fetch(apiImages, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ category, product, dataUrl }),
+        });
+        const result = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(result.error || `HTTP ${res.status}`);
+
+        setSlotImage(row, urlFromPath(result.path));
+        // public/ 的變動可能讓 dev server 重新整理頁面，先立刻把 img_url 寫回 JSON
+        await persist();
+        const kb = Math.round((result.bytes || 0) / 1024);
+        setStatus(`✅ 已存圖 ${result.path}（${kb} KB），img_url 已寫回 ${select.value}`, 'ok');
+      } catch (err) {
+        setStatus('上傳失敗：' + err.message, 'error');
+      } finally {
+        setEnabled(true);
+      }
+    }
+
+    async function clearImage(row) {
+      if (busy) return;
+      const slot = row.querySelector('.img-slot');
+      const imgUrl = slot.dataset.imgUrl;
+      const product = row.querySelector('[data-field="id"]').value.trim();
+      const category = form.elements.id.value.trim();
+      setSlotImage(row, '');
+      try {
+        if (imgUrl?.includes('/images/') && ID_RE.test(category) && ID_RE.test(product)) {
+          const url = new URL(apiImages, base);
+          url.searchParams.set('category', category);
+          url.searchParams.set('product', product);
+          await fetch(url.href, { method: 'DELETE' });
+        }
+        await persist();
+        setStatus('已移除圖片並清掉 img_url', 'ok');
+      } catch (err) {
+        setStatus('清除圖片失敗：' + err.message, 'error');
+      }
+    }
+
+    function addProductRow(id, name, imgUrl, focus) {
       const row = document.createElement('div');
       row.className = 'product-row';
+      row.dataset.productRow = '1';
 
+      // ---- 圖片格位 ----
+      const slot = document.createElement('div');
+      slot.className = 'img-slot';
+      slot.tabIndex = 0;
+      slot.title = '點擊選定此格位，再按 Ctrl+V 貼上剪貼簿圖片；或按 📷 選檔';
+
+      const preview = document.createElement('div');
+      preview.className = 'img-preview';
+
+      const tools = document.createElement('div');
+      tools.className = 'img-tools';
+      const makeTool = (label, title, fn) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'img-tool';
+        b.textContent = label;
+        b.title = title;
+        b.addEventListener('click', (e) => {
+          e.stopPropagation();
+          fn();
+        });
+        return b;
+      };
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+      fileInput.className = 'sr-only';
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files?.[0];
+        fileInput.value = '';
+        if (file) uploadImage(row, file);
+      });
+      tools.append(
+        makeTool('📷', '選擇圖片檔案', () => {
+          setPasteTarget(row);
+          fileInput.click();
+        }),
+        makeTool('✕', '清除圖片', () => clearImage(row)),
+        fileInput,
+      );
+
+      slot.append(preview, tools);
+      slot.addEventListener('click', () => setPasteTarget(row));
+      slot.addEventListener('focus', () => setPasteTarget(row));
+
+      // ---- ID / 名稱 ----
       const idInput = document.createElement('input');
       idInput.type = 'text';
       idInput.value = id;
       idInput.required = true;
       idInput.autocomplete = 'off';
       idInput.placeholder = '例如 pork-belly';
+      idInput.dataset.field = 'id';
 
       const nameInput = document.createElement('input');
       nameInput.type = 'text';
@@ -133,7 +326,9 @@ const isDev = import.meta.env.DEV;
       nameInput.required = true;
       nameInput.autocomplete = 'off';
       nameInput.placeholder = '例如 梅花豬肉';
+      nameInput.dataset.field = 'name';
 
+      // ---- 排序 / 刪除 ----
       const actions = document.createElement('span');
       actions.className = 'row-actions';
       const makeBtn = (label, title, fn) => {
@@ -156,21 +351,27 @@ const isDev = import.meta.env.DEV;
         }),
         makeBtn('✕', '刪除', () => {
           row.remove();
+          if (pasteTarget === row) pasteTarget = null;
           updateProductCount();
         }),
       );
 
-      row.append(idInput, nameInput, actions);
+      row.append(slot, idInput, nameInput, actions);
       productList.appendChild(row);
+      setSlotImage(row, imgUrl || '');
       updateProductCount();
       if (focus) idInput.focus();
+      return row;
     }
 
     function collectData() {
-      const products = [...productList.querySelectorAll('.product-row:not(.product-header)')].map((row) => {
-        const [id, name] = [...row.querySelectorAll('input')].map((i) => i.value.trim());
-        return { id, name };
-      });
+      const products = [
+        ...productList.querySelectorAll('.product-row[data-product-row]'),
+      ].map((row) => ({
+        id: row.querySelector('[data-field="id"]').value.trim(),
+        name: row.querySelector('[data-field="name"]').value.trim(),
+        img_url: row.querySelector('.img-slot').dataset.imgUrl || '',
+      }));
       const el = form.elements;
       return {
         id: el.id.value.trim(),
@@ -188,7 +389,10 @@ const isDev = import.meta.env.DEV;
       el.icon.value = data.icon || '';
       el.order.value = data.order ?? 0;
       productList.innerHTML = '';
-      (data.products || []).forEach((p) => addProductRow(p.id || '', p.name || ''));
+      pasteTarget = null;
+      (data.products || []).forEach((p) => addProductRow(p.id || '', p.name || '', p.img_url || ''));
+      const first = productList.querySelector('.product-row[data-product-row]');
+      if (first) setPasteTarget(first);
     }
 
     function validate(data) {
@@ -250,6 +454,7 @@ const isDev = import.meta.env.DEV;
     }
 
     saveBtn.addEventListener('click', async () => {
+      if (busy) return;
       const data = collectData();
       const err = validate(data);
       if (err) {
@@ -261,20 +466,12 @@ const isDev = import.meta.env.DEV;
       saveBtn.disabled = true;
       setStatus('儲存中…', 'loading');
       try {
-        const res = await fetch(apiFile(slug), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: JSON.stringify(data, null, 2) + '\n' }),
-        });
-        const result = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(result.error || `HTTP ${res.status}`);
-        // 檔名可能因 ID 更動而不同
+        await persist();
         const newSlug = slugFromId(data.id) + '.json';
         setStatus('✅ 已覆寫 ' + slug + '，dev server 會自動重新整理', 'ok');
         if (newSlug !== slug) {
           setStatus('⚠️ 類別 ID 已變更，建議手動重新命名檔案為 ' + newSlug, 'warning');
         }
-        render(data);
       } catch (e) {
         setStatus('儲存失敗：' + e.message, 'error');
       } finally {
@@ -284,7 +481,28 @@ const isDev = import.meta.env.DEV;
 
     reloadBtn.addEventListener('click', loadFile);
 
-    addProductBtn.addEventListener('click', () => addProductRow('', '', true));
+    addProductBtn.addEventListener('click', () => {
+      const row = addProductRow('', '', '', true);
+      setPasteTarget(row); // 新增完通常接著貼圖，直接把貼上目標指到新列
+    });
+
+    // Ctrl+V / Cmd+V：有圖片就上傳，純文字維持正常貼上
+    document.addEventListener('paste', (event) => {
+      const items = [...(event.clipboardData?.items ?? [])];
+      const item = items.find((i) => i.kind === 'file' && i.type.startsWith('image/'));
+      if (!item) return;
+      event.preventDefault();
+      if (!pasteTarget || !productList.contains(pasteTarget)) {
+        setStatus('請先點一下要上圖的產品格位，再按 Ctrl+V', 'warning');
+        return;
+      }
+      const file = item.getAsFile();
+      if (!file) {
+        setStatus('剪貼簿中讀不到圖片', 'error');
+        return;
+      }
+      uploadImage(pasteTarget, file);
+    });
 
     select.addEventListener('change', loadFile);
     loadList();

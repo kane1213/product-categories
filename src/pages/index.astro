@@ -14,7 +14,7 @@ import '../styles/global.css';
   <body>
     <div class="container">
       <h1>📦 產品類別 API</h1>
-      <p class="page-subtitle">開發時直接編輯 <code>src/content/products.json</code></p>
+      <p class="page-subtitle">開發時用 <a href="editor">類別編輯器</a> 線上編輯 <code>src/content/categories/*.json</code></p>
 
       <div class="info-card">
         <h2>🔌 API Endpoint</h2>
@@ -24,17 +24,30 @@ import '../styles/global.css';
         </div>
 
         <h2>📄 JSON 格式</h2>
-        <pre><code>{`  "categories": [
+        <p>API 輸出 <code>categories</code> 陣列，由 <code>src/content/categories/</code> 下每個類別檔案組合成：</p>
+        <pre><code>{`{
+  "categories": [
     {
       "id": "category-id",
       "name": "分類名稱",
       "icon": "🏷️",
+      "order": 1,
       "products": [
-        { "id": "product-id", "name": "產品名稱" }
+        {
+          "id": "product-id",
+          "name": "產品名稱",
+          "img_url": "/product-categories/images/category-id/product-id.png"
+        }
       ]
     }
   ]
+}
 `}</code></pre>
+        <p class="field-notes">
+          <code>img_url</code>：產品圖的部署後路徑（含 <code>base</code>，可直接當 <code>&lt;img src&gt;</code> 用），
+          實體檔放在 <code>public/images/&lt;類別ID&gt;/&lt;產品ID&gt;.&lt;副檔名&gt;</code>，build 時會一併複製進 <code>dist/</code>；
+          沒有圖時為空字串。
+        </p>
       </div>
 
       <div class="info-card">
@@ -46,10 +59,12 @@ import '../styles/global.css';
       <div class="info-card">
         <h2>🛠️ 開發說明</h2>
         <ul>
-          <li>編輯 <code>src/content/products.json</code> 來修改分類與產品</li>
-          <li>執行 <code>npm run build</code> 後部署</li>
+          <li>開發模式下到 <a href="editor">類別編輯器</a>，以表單修改分類與產品</li>
+          <li>產品圖：在編輯器點某列的圖片格位選定後按 <code>Ctrl</code>+<code>V</code> 貼上，或按 📷 選檔；檔名固定為 <code>&lt;類別ID&gt;/&lt;產品ID&gt;</code>，上傳成功會自動寫回 <code>img_url</code></li>
+          <li>改產品 ID 後舊圖檔不會自動改名，請重新上傳一次以產生對應的新檔</li>
+          <li>儲存時直接覆寫 <code>src/content/categories/&lt;slug&gt;.json</code>，dev server 自動重新整理</li>
           <li>API 會讀取 JSON 檔案並輸出 <code>application/json</code></li>
-          <li>開發模式：<code>npm run dev</code> 也可測試（需 Astro 支援 .js 輸出）</li>
+          <li>確認無誤後執行 <code>npm run build</code> 部署（編輯器與相關 API 僅開發模式可用）</li>
         </ul>
       </div>
     </div>
@@ -59,7 +74,7 @@ import '../styles/global.css';
         const resp = document.getElementById('api-response');
         resp.innerHTML = '<code>載入中...</code>';
         try {
-          const res = await fetch('/api/categories.json');
+          const res = await fetch('api/categories.json');
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = await res.json();
           resp.innerHTML = '<code>' + JSON.stringify(data, null, 2) + '</code>';
