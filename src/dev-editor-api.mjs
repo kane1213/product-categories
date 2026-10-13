@@ -277,7 +277,12 @@ async function handleRequest(request, response, next, base) {
     try {
       body = await readJsonBody(request);
     } catch (error) {
-      sendJson(response, error.status ?? 400, { error: '無效的 JSON request body' });
+      sendJson(response, error.status ?? 400, {
+        error:
+          error.status === 413
+            ? '內容過大（request body 超過 1 MB 上限）'
+            : '無效的 JSON request body',
+      });
       return;
     }
 
